@@ -38,10 +38,10 @@
             android:id="@+id/row_one_index_one"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:background="@drawable/tile_standard"
+            android:background="@drawable/tile_incorrect"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
+            android:text="S"
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
@@ -52,10 +52,10 @@
             android:id="@+id/row_one_index_two"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:background="@drawable/tile_standard"
+            android:background="@drawable/tile_correct"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
+            android:text="S"
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
@@ -66,10 +66,10 @@
             android:id="@+id/row_one_index_three"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:background="@drawable/tile_standard"
+            android:background="@drawable/tile_partial"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
+            android:text="S"
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
@@ -176,5 +176,18 @@
             android:textStyle="bold" />
 
     </LinearLayout>
+
+    <com.example.zodziu_zaidimas.MyKeyboard
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:id="@+id/keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
