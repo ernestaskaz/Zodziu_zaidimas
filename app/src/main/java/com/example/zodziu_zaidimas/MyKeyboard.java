@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -166,12 +167,15 @@ public class MyKeyboard extends LinearLayout implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
+
         // do nothing if the InputConnection has not been set yet
         if (inputConnection == null) return;
 
         // Delete text or input key value
         // All communication goes through the InputConnection
         if (v.getId() == R.id.button_delete) {
+
+
             CharSequence selectedText = inputConnection.getSelectedText(0);
             if (TextUtils.isEmpty(selectedText)) {
                 // no selection, so delete previous character
