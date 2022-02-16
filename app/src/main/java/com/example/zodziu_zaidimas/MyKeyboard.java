@@ -13,6 +13,9 @@ import android.widget.LinearLayout;
 
 public class MyKeyboard extends LinearLayout implements View.OnClickListener {
 
+    private OnDeleteListener onDeleteListener;
+    private OnEnterListener onEnterListener;
+
     // constructors
     public MyKeyboard(Context context) {
         this(context, null, 0);
@@ -184,7 +187,18 @@ public class MyKeyboard extends LinearLayout implements View.OnClickListener {
                 // delete the selection
                 inputConnection.commitText("", 1);
             }
-        } else {
+            if (onDeleteListener != null) {
+                onDeleteListener.onDeleteClick();
+            }
+
+        }
+
+        else if(v.getId() == R.id.button_enter) {
+            onEnterListener.onEnterClick();
+        }
+
+
+        else  {
             String value = keyValues.get(v.getId());
             inputConnection.commitText(value, 1);
         }
@@ -195,4 +209,24 @@ public class MyKeyboard extends LinearLayout implements View.OnClickListener {
     public void setInputConnection(InputConnection ic) {
         this.inputConnection = ic;
     }
+
+    public void setOnDeleteListener(OnDeleteListener listener) {
+        this.onDeleteListener = listener;
+    }
+
+    public void setOnEnterListener(OnEnterListener listener) {
+        this.onEnterListener = listener;
+    }
+
+    public interface OnDeleteListener {
+
+        void onDeleteClick();
+
+    }
+
+    public interface OnEnterListener {
+        void onEnterClick();
+    }
 }
+
+
