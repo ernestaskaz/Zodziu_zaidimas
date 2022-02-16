@@ -114,10 +114,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text="S"
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_two_index_one"
@@ -128,10 +128,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_two_index_two"
@@ -142,10 +142,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_two_index_three"
@@ -156,10 +156,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_two_index_four"
@@ -170,10 +170,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
     </LinearLayout>
 
@@ -199,10 +199,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text="S"
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_three_index_one"
@@ -213,10 +213,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_three_index_two"
@@ -227,10 +227,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_three_index_three"
@@ -241,10 +241,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_three_index_four"
@@ -255,10 +255,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
     </LinearLayout>
 
@@ -284,10 +284,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text="S"
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_four_index_one"
@@ -298,10 +298,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_four_index_two"
@@ -312,10 +312,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_four_index_three"
@@ -326,10 +326,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_four_index_four"
@@ -340,10 +340,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
     </LinearLayout>
     <LinearLayout
@@ -368,10 +368,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text="S"
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_five_index_one"
@@ -382,10 +382,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_five_index_two"
@@ -396,10 +396,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_five_index_three"
@@ -410,10 +410,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_five_index_four"
@@ -424,10 +424,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
     </LinearLayout>
 
@@ -454,10 +454,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text="S"
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_six_index_one"
@@ -468,10 +468,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_six_index_two"
@@ -482,10 +482,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_six_index_three"
@@ -496,10 +496,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/row_six_index_four"
@@ -510,10 +510,10 @@
             android:background="@drawable/tile_standard"
             android:gravity="center"
             android:padding="15dp"
-            android:text=""
             android:textColor="#FFFAFA"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLength="1"/>
 
     </LinearLayout>
 

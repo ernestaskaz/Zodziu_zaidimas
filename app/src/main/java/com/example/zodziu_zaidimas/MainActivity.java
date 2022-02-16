@@ -113,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
 //                    compareGuess(currentGuess, correctAnswer);
 //                }
                 compareGuess(currentGuess, correctAnswer);
+
                 Toast.makeText(MainActivity.this, currentGuess, Toast.LENGTH_SHORT).show();
             }
         });
