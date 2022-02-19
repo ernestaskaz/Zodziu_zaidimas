@@ -2,6 +2,8 @@ package com.example.zodziu_zaidimas;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,6 +13,10 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.zodziu_zaidimas.Database.WordsDatabase;
+import com.example.zodziu_zaidimas.Model.Words;
+import com.example.zodziu_zaidimas.Service.WordsService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -168,6 +174,17 @@ public class MainActivity extends AppCompatActivity {
 
         //Start with first row.
         setRoundRow(roundCount);
+
+        WordsDatabase wordsDatabase = WordsDatabase.getInstance(this);
+        WordsService wordsService = wordsDatabase.wordsService();
+        wordsDatabase.close();
+        LiveData<List<Words>> list = wordsService.getAll();
+        list.observe(this, new Observer<List<Words>>() {
+            @Override
+            public void onChanged(List<Words> words) {
+                System.out.println("current word size is " + words.size());
+            }
+        });
 
         //Delete char in each EditText of currentRow.
         keyboard.setOnDeleteListener(new MyKeyboard.OnDeleteListener() {
