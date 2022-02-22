@@ -30,4 +30,7 @@ public interface WordsService {
     //standard data so it can be edited.
     @Query("SELECT * FROM Words WHERE word = :word")
     boolean getByWordSync(String word);
+    @Query("SELECT * FROM Words WHERE isGuessed = 0")
+    List<Words> getAllAsync();
+
 }

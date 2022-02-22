@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 import com.example.zodziu_zaidimas.Database.WordsDatabase;
 import com.example.zodziu_zaidimas.Model.Words;
 import com.example.zodziu_zaidimas.Service.WordsService;
+import com.example.zodziu_zaidimas.ViewModel.DictionaryViewModel;
+import com.example.zodziu_zaidimas.ViewModel.WordsViewModel;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,8 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
     MyKeyboard keyboard;
     List<String> testList = Arrays.asList("QUICK", "BOAST", "ELDEN", "WASTE", "SAINT");
-    String correctAnswer = "RAGER";
     int roundCount = 1;
+
+    private WordsViewModel wordsViewModel;
+    private DictionaryViewModel dictionaryViewModel;
+    private Words wordToGuess;
 
     List<EditText> currentRowList;
 
@@ -175,16 +181,31 @@ public class MainActivity extends AppCompatActivity {
         //Start with first row.
         setRoundRow(roundCount);
 
-        WordsDatabase wordsDatabase = WordsDatabase.getInstance(this);
-        WordsService wordsService = wordsDatabase.wordsService();
-        wordsDatabase.close();
-        LiveData<List<Words>> list = wordsService.getAll();
-        list.observe(this, new Observer<List<Words>>() {
-            @Override
-            public void onChanged(List<Words> words) {
-                System.out.println("current word size is " + words.size());
-            }
-        });
+        wordsViewModel = new ViewModelProvider.AndroidViewModelFactory(this.getApplication()).create(WordsViewModel.class);
+        wordToGuess = wordsViewModel.getRandomWord();
+        System.out.println("current word is" + wordToGuess.getWord());
+
+//        WordsDatabase wordsDatabase = WordsDatabase.getInstance(this);
+//        WordsService wordsService = wordsDatabase.wordsService();
+//        wordsDatabase.close();
+//        LiveData<List<Words>> list = wordsService.getAll();
+//        list.observe(this, new Observer<List<Words>>() {
+//            @Override
+//            public void onChanged(List<Words> words) {
+//                System.out.println("current word size is " + words.size());
+//                wordToGuess = list.getValue().get(1);
+//                System.out.println("current word size random is " + wordToGuess.getWord());
+//
+//                System.out.println("current word size correct answer " + wordToGuess.isGuessed());
+//                correctAnswer = wordToGuess.getWord();
+//
+//            }
+//        });
+//
+//        System.out.println("current word size after " + correctAnswer);
+//        System.out.println("current word size correct answer " + wordToGuess.isGuessed());
+//        wordToGuess.setGuessed(true);
+//        wordsViewModel.updateWord(wordToGuess);
 
         //Delete char in each EditText of currentRow.
         keyboard.setOnDeleteListener(new MyKeyboard.OnDeleteListener() {
@@ -210,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
 //                if (isFiveLetters(currentGuess) && doesExist(currentGuess)) {
 //                    compareGuess(currentGuess, correctAnswer);
 //                }
-                compareGuess(currentGuess, correctAnswer);
+                compareGuess(currentGuess, wordToGuess.getWord());
                 incrementRoundCount();
                 setRoundRow(roundCount);
 

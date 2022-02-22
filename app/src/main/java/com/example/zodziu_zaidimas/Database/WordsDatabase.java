@@ -9,6 +9,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.zodziu_zaidimas.Model.Dictionary;
 import com.example.zodziu_zaidimas.Model.Words;
+import com.example.zodziu_zaidimas.Service.DictionaryService;
 import com.example.zodziu_zaidimas.Service.WordsService;
 
 
@@ -29,5 +30,6 @@ public abstract class WordsDatabase extends RoomDatabase {
     }
     //body is taken care of by Room; Similar to Spring, but in Spring pačiam reikėjo implementuotis. čia nereik.
     public abstract WordsService wordsService();
+    public abstract DictionaryService dictionaryService();
 
 }
