@@ -3,9 +3,6 @@ package com.example.zodziu_zaidimas.Repository;
 import android.app.Application;
 import android.os.AsyncTask;
 
-import androidx.lifecycle.LiveData;
-import androidx.room.Update;
-
 import com.example.zodziu_zaidimas.Database.WordsDatabase;
 import com.example.zodziu_zaidimas.Model.Words;
 import com.example.zodziu_zaidimas.Service.WordsService;

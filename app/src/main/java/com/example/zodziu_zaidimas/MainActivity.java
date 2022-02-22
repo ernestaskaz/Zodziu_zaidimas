@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.zodziu_zaidimas.Database.WordsDatabase;
+import com.example.zodziu_zaidimas.Model.Dictionary;
 import com.example.zodziu_zaidimas.Model.Words;
 import com.example.zodziu_zaidimas.Service.WordsService;
 import com.example.zodziu_zaidimas.ViewModel.DictionaryViewModel;
@@ -183,6 +184,7 @@ public class MainActivity extends AppCompatActivity {
 
         wordsViewModel = new ViewModelProvider.AndroidViewModelFactory(this.getApplication()).create(WordsViewModel.class);
         wordToGuess = wordsViewModel.getRandomWord();
+        dictionaryViewModel = new ViewModelProvider.AndroidViewModelFactory(this.getApplication()).create(DictionaryViewModel.class);
         System.out.println("current word is" + wordToGuess.getWord());
 
 //        WordsDatabase wordsDatabase = WordsDatabase.getInstance(this);
@@ -264,8 +266,35 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+//    public boolean doesExist(String currentGuess) {
+//        if (testList.contains(currentGuess)) {
+//            Toast.makeText(this, "exists", Toast.LENGTH_SHORT).show();
+//            return true;
+//        }
+//
+//        Toast.makeText(this, "Not a word!", Toast.LENGTH_SHORT).show();
+//        return false;
+//    }
+
     public boolean doesExist(String currentGuess) {
-        if (testList.contains(currentGuess)) {
+
+        final boolean[] currentValue = {false};
+
+        System.out.println("current word is " + currentValue[0]);
+
+        dictionaryViewModel.getAllWords().observe(this, new Observer<List<Dictionary>>() {
+            @Override
+            public void onChanged(List<Dictionary> dictionaries) {
+                if (dictionaries.contains(currentGuess)) {
+                    currentValue[0] = true;
+                }
+
+            }
+        });
+        dictionaryViewModel.getAllWords().removeObservers(this);
+
+        System.out.println("current word is " + currentValue[0]);
+        if (currentValue[0]) {
             Toast.makeText(this, "exists", Toast.LENGTH_SHORT).show();
             return true;
         }
@@ -337,7 +366,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start,int before, int count)
             {
                 // TODO Auto-generated method stub
-                if( currentRowList.get(0).getText().toString().length()==1)     //size as per your requirement
+                if( currentRowList.get(0).getText().toString().length()==1)
                 {
                     EditText nextEditText =  currentRowList.get(1);
                     nextEditText.requestFocus();
@@ -369,7 +398,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start,int before, int count)
             {
                 // TODO Auto-generated method stub
-                if( currentRowList.get(1).getText().toString().length()==1)     //size as per your requirement
+                if( currentRowList.get(1).getText().toString().length()==1)
                 {
                     EditText nextEditText =  currentRowList.get(2);
                     nextEditText.requestFocus();
@@ -398,7 +427,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start,int before, int count)
             {
                 // TODO Auto-generated method stub
-                if( currentRowList.get(2).getText().toString().length()==1)     //size as per your requirement
+                if( currentRowList.get(2).getText().toString().length()==1)
                 {
                     EditText nextEditText =  currentRowList.get(3);
                     nextEditText.requestFocus();
@@ -428,7 +457,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start,int before, int count)
             {
                 // TODO Auto-generated method stub
-                if( currentRowList.get(3).getText().toString().length()==1)     //size as per your requirement
+                if( currentRowList.get(3).getText().toString().length()==1)
                 {
                     EditText nextEditText =  currentRowList.get(4);
                     nextEditText.requestFocus();

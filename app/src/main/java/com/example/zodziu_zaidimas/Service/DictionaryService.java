@@ -23,7 +23,7 @@ public interface DictionaryService {
     void delete(Dictionary word);
     @Update
     void update(Dictionary word);
-    @Query("SELECT * FROM Dictionary")
+    @Query("SELECT word FROM Dictionary")
     LiveData<List<Dictionary>> getAll();
     @Query("SELECT * FROM Dictionary WHERE id = :id")
     LiveData<Dictionary> getById(int id);
