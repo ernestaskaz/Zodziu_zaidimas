@@ -14,16 +14,15 @@ import java.util.List;
 
 public class DictionaryViewModel extends AndroidViewModel {
     private DictionaryRepository dictionaryRepository;
-    private LiveData<List<Dictionary>> wordsDictionary;
+    private List<String> wordsDictionary;
 
     public DictionaryViewModel(@NonNull Application application) {
         super(application);
         dictionaryRepository = new DictionaryRepository(application);
-        wordsDictionary = dictionaryRepository.getAllWords();
 
     }
 
-    public LiveData<List<Dictionary>> getAllWords() {
-        return wordsDictionary;
+    public List<String> getAllWords() {
+        return wordsDictionary = dictionaryRepository.getAllWords();
     }
 }

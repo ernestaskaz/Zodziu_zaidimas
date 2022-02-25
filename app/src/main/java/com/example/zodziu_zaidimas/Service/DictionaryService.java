@@ -24,7 +24,7 @@ public interface DictionaryService {
     @Update
     void update(Dictionary word);
     @Query("SELECT word FROM Dictionary")
-    LiveData<List<Dictionary>> getAll();
+    LiveData<List<String>> getAll();
     @Query("SELECT * FROM Dictionary WHERE id = :id")
     LiveData<Dictionary> getById(int id);
     @Query("SELECT * FROM Dictionary WHERE word = :word")
@@ -32,4 +32,6 @@ public interface DictionaryService {
     //standard data so it can be edited.
     @Query("SELECT * FROM Dictionary WHERE word = :word")
     boolean getByWordSync(String word);
+    @Query("SELECT word FROM Dictionary")
+    List<String> getAllSync();
 }

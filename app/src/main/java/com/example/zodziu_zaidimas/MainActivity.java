@@ -1,15 +1,18 @@
 package com.example.zodziu_zaidimas;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.solver.state.State;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.widget.EditText;
@@ -17,10 +20,12 @@ import android.widget.Toast;
 
 import com.example.zodziu_zaidimas.Database.WordsDatabase;
 import com.example.zodziu_zaidimas.Model.Dictionary;
+import com.example.zodziu_zaidimas.Model.Statistics;
 import com.example.zodziu_zaidimas.Model.Words;
 import com.example.zodziu_zaidimas.Service.WordsService;
 import com.example.zodziu_zaidimas.ViewModel.DictionaryViewModel;
 import com.example.zodziu_zaidimas.ViewModel.WordsViewModel;
+import com.google.gson.Gson;
 
 import java.util.Arrays;
 import java.util.List;
@@ -42,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     List<EditText> sixthRowList;
 
     MyKeyboard keyboard;
-    List<String> testList = Arrays.asList("QUICK", "BOAST", "ELDEN", "WASTE", "SAINT");
+    List<String> wordsDictionary;
     int roundCount = 1;
 
     private WordsViewModel wordsViewModel;
@@ -50,6 +55,10 @@ public class MainActivity extends AppCompatActivity {
     private Words wordToGuess;
 
     List<EditText> currentRowList;
+
+    Statistics statistics;
+    SharedPreferences  mPrefs;
+    ResultsDialog resultsDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,35 +188,43 @@ public class MainActivity extends AppCompatActivity {
         sixthRowList = Arrays.asList(rowSixIndexZero, rowSixIndexOne, rowSixIndexTwo, rowSixIndexThree, rowSixIndexFour);
 
 
-        //Start with first row.
-        setRoundRow(roundCount);
+
+
 
         wordsViewModel = new ViewModelProvider.AndroidViewModelFactory(this.getApplication()).create(WordsViewModel.class);
-        wordToGuess = wordsViewModel.getRandomWord();
         dictionaryViewModel = new ViewModelProvider.AndroidViewModelFactory(this.getApplication()).create(DictionaryViewModel.class);
-        System.out.println("current word is" + wordToGuess.getWord());
+        wordsDictionary = dictionaryViewModel.getAllWords();
 
-//        WordsDatabase wordsDatabase = WordsDatabase.getInstance(this);
-//        WordsService wordsService = wordsDatabase.wordsService();
-//        wordsDatabase.close();
-//        LiveData<List<Words>> list = wordsService.getAll();
-//        list.observe(this, new Observer<List<Words>>() {
-//            @Override
-//            public void onChanged(List<Words> words) {
-//                System.out.println("current word size is " + words.size());
-//                wordToGuess = list.getValue().get(1);
-//                System.out.println("current word size random is " + wordToGuess.getWord());
-//
-//                System.out.println("current word size correct answer " + wordToGuess.isGuessed());
-//                correctAnswer = wordToGuess.getWord();
-//
-//            }
-//        });
-//
-//        System.out.println("current word size after " + correctAnswer);
-//        System.out.println("current word size correct answer " + wordToGuess.isGuessed());
-//        wordToGuess.setGuessed(true);
-//        wordsViewModel.updateWord(wordToGuess);
+        startNewGame();
+        System.out.println("current word is " + wordToGuess.getWord());
+
+//        statistics.setWordsLeft(wordsViewModel.wordsToGuessSize());
+//        statistics.setGamesPlayed(0);
+//        statistics.setGamesWon(0);
+//        statistics.setGuessedOnFourth(0);
+//        statistics.setGuessedOnFirst(0);
+//        statistics.setGuessedOnSecond(0);
+//        statistics.setGuessedOnThird(0);
+//        statistics.setGuessedOnFifth(0);
+//        statistics.setGuessedOnSixth(0);
+//        System.out.println("current word is " + wordsViewModel.wordsToGuessSize());
+//        updateStatistics(statistics);
+//        statistics = retrieveStatistics();
+//        System.out.println("current word is " + statistics.getWordsLeft());
+
+
+
+
+
+
+
+        resultsDialog = new ResultsDialog(statistics);
+        resultsDialog.showResultsDialog(this);
+
+        //Start with first row.
+        //setRoundRow(roundCount);
+
+
 
         //Delete char in each EditText of currentRow.
         keyboard.setOnDeleteListener(new MyKeyboard.OnDeleteListener() {
@@ -230,16 +247,38 @@ public class MainActivity extends AppCompatActivity {
                 isFiveLetters(currentGuess);
                 doesExist(currentGuess);
                 //.TODO if exists and five letters then proceed.
-//                if (isFiveLetters(currentGuess) && doesExist(currentGuess)) {
-//                    compareGuess(currentGuess, correctAnswer);
-//                }
-                compareGuess(currentGuess, wordToGuess.getWord());
-                incrementRoundCount();
-                setRoundRow(roundCount);
+                if (isFiveLetters(currentGuess) && doesExist(currentGuess)) {
+                    compareGuess(currentGuess, wordToGuess.getWord());
+                    incrementRoundCount();
+                    setRoundRow(roundCount);
+                }
 
-                Toast.makeText(MainActivity.this, currentGuess, Toast.LENGTH_SHORT).show();
+
             }
         });
+        
+        resultsDialog.restartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startNewGame();
+            }
+        });
+
+        resultsDialog.exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+               resultsDialog.dialog.cancel();
+            }
+        });
+    }
+
+    private void startNewGame() {
+
+        wordToGuess = wordsViewModel.getRandomWord();
+        statistics = retrieveStatistics();
+        roundCount = 1;
+        setRoundRow(roundCount);
     }
 
 
@@ -266,42 +305,16 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-//    public boolean doesExist(String currentGuess) {
-//        if (testList.contains(currentGuess)) {
-//            Toast.makeText(this, "exists", Toast.LENGTH_SHORT).show();
-//            return true;
-//        }
-//
-//        Toast.makeText(this, "Not a word!", Toast.LENGTH_SHORT).show();
-//        return false;
-//    }
-
     public boolean doesExist(String currentGuess) {
-
-        final boolean[] currentValue = {false};
-
-        System.out.println("current word is " + currentValue[0]);
-
-        dictionaryViewModel.getAllWords().observe(this, new Observer<List<Dictionary>>() {
-            @Override
-            public void onChanged(List<Dictionary> dictionaries) {
-                if (dictionaries.contains(currentGuess)) {
-                    currentValue[0] = true;
-                }
-
-            }
-        });
-        dictionaryViewModel.getAllWords().removeObservers(this);
-
-        System.out.println("current word is " + currentValue[0]);
-        if (currentValue[0]) {
-            Toast.makeText(this, "exists", Toast.LENGTH_SHORT).show();
+        if (wordsDictionary.contains(currentGuess)) {
             return true;
         }
 
-        Toast.makeText(this, "Not a word!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "There is no such word!", Toast.LENGTH_SHORT).show();
         return false;
     }
+
+
 
     public void compareGuess(String currentGuess, String correctAnswer) {
         for (int i = 0; i < currentGuess.length(); i++) {
@@ -315,6 +328,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (currentGuess.charAt(i) == correctAnswer.charAt(i)) {
                     currentRowList.get(i).setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.tile_correct));
+                    resultsDialog.showResultsDialog(this);
+
                 }
 
             }
@@ -327,9 +342,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     public void setRoundRow(int roundNumber) {
-        System.out.println("round count" + roundCount);
-        System.out.println("round nr" + roundNumber);
         switch(roundNumber) {
             case 1:
                 currentRowList = firstRowList;
@@ -480,5 +494,26 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+
+    }
+
+    public void updateStatistics (Statistics statistics) {
+        mPrefs = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(statistics);
+        prefsEditor.putString("statistics", json);
+        prefsEditor.commit();
+    }
+
+    public Statistics retrieveStatistics() {
+        mPrefs = getPreferences(MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPrefs.getString("statistics", "");
+        Statistics statistics = gson.fromJson(json, Statistics.class);
+        if (statistics == null) {
+            statistics = new Statistics();
+        }
+        return statistics;
     }
 }

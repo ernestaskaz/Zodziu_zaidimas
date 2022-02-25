@@ -35,6 +35,10 @@ public class WordsViewModel extends AndroidViewModel {
         return currentGuess;
     }
 
+    public int wordsToGuessSize() {
+        return wordsToGuess.size();
+    }
+
     public void updateWord(Words word) {
         wordsRepository.update(word);
     }
