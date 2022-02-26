@@ -19,10 +19,12 @@ public class WordsViewModel extends AndroidViewModel {
     public WordsViewModel(@NonNull Application application) {
         super(application);
         wordsRepository = new WordsRepository(application);
-        wordsToGuess = wordsRepository.getWordsToGuess();
+        getWordsToGuess();
     }
 
+
     public List<Words> getWordsToGuess() {
+        wordsToGuess = wordsRepository.getWordsToGuess();
         return wordsToGuess;
     }
 
@@ -31,6 +33,7 @@ public class WordsViewModel extends AndroidViewModel {
         int randomValue = random.nextInt(wordsToGuess.size() - 1);
 
         Words currentGuess = wordsToGuess.get(randomValue);
+        System.out.println("current word is " + currentGuess.getWord());
 
         return currentGuess;
     }

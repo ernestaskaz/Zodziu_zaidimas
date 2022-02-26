@@ -32,7 +32,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_one_index_one"
@@ -46,7 +47,8 @@
             android:textStyle="bold"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_one_index_two"
@@ -60,7 +62,8 @@
             android:textStyle="bold"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_one_index_three"
@@ -74,7 +77,8 @@
             android:textStyle="bold"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_one_index_four"
@@ -88,7 +92,8 @@
             android:textStyle="bold"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
     </LinearLayout>
 
@@ -103,6 +108,7 @@
         app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/row_one"
+
         >
 
         <EditText
@@ -117,7 +123,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_two_index_one"
@@ -131,7 +138,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_two_index_two"
@@ -145,7 +153,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_two_index_three"
@@ -159,7 +168,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_two_index_four"
@@ -173,7 +183,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
     </LinearLayout>
 
@@ -202,7 +213,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_three_index_one"
@@ -216,7 +228,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_three_index_two"
@@ -230,7 +243,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_three_index_three"
@@ -244,7 +258,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_three_index_four"
@@ -258,7 +273,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
     </LinearLayout>
 
@@ -287,7 +303,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_four_index_one"
@@ -301,7 +318,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_four_index_two"
@@ -315,7 +333,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_four_index_three"
@@ -329,7 +348,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_four_index_four"
@@ -343,7 +363,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
     </LinearLayout>
     <LinearLayout
@@ -371,7 +392,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_five_index_one"
@@ -385,7 +407,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_five_index_two"
@@ -399,7 +422,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_five_index_three"
@@ -413,7 +437,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_five_index_four"
@@ -427,7 +452,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
     </LinearLayout>
 
@@ -457,7 +483,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_six_index_one"
@@ -471,7 +498,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_six_index_two"
@@ -485,7 +513,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_six_index_three"
@@ -499,7 +528,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/row_six_index_four"
@@ -513,7 +543,8 @@
             android:textColor="#FFFAFA"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:cursorVisible="false"/>
 
     </LinearLayout>
 

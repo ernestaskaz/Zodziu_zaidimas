@@ -84,5 +84,32 @@ public class Statistics {
         this.guessedOnSixth = guessedOnSixth;
     }
 
+    public void incrementGamesPlayed() {
+        this.gamesPlayed++;
+    }
+
+    public void addGuessedOnFirst() {
+        this.guessedOnFirst++;
+    }
+
+    public void addGuessedOnSecond() {
+        this.guessedOnSecond++;
+    }
+    public void addGuessedOnThird() {
+        this.guessedOnThird++;
+    }
+
+    public void addGuessedOnFourth() {
+        this.guessedOnFourth++;
+    }
+
+    public void addGuessedOnFifth() {
+        this.guessedOnFifth++;
+    }
+
+    public void addGuessedOnSixth() {
+        this.guessedOnSixth++;
+    }
+
 
 }

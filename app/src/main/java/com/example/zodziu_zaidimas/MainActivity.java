@@ -1,10 +1,7 @@
 package com.example.zodziu_zaidimas;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.solver.state.State;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.SharedPreferences;
@@ -18,11 +15,8 @@ import android.view.inputmethod.InputConnection;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.zodziu_zaidimas.Database.WordsDatabase;
-import com.example.zodziu_zaidimas.Model.Dictionary;
 import com.example.zodziu_zaidimas.Model.Statistics;
 import com.example.zodziu_zaidimas.Model.Words;
-import com.example.zodziu_zaidimas.Service.WordsService;
 import com.example.zodziu_zaidimas.ViewModel.DictionaryViewModel;
 import com.example.zodziu_zaidimas.ViewModel.WordsViewModel;
 import com.google.gson.Gson;
@@ -188,6 +182,8 @@ public class MainActivity extends AppCompatActivity {
         sixthRowList = Arrays.asList(rowSixIndexZero, rowSixIndexOne, rowSixIndexTwo, rowSixIndexThree, rowSixIndexFour);
 
 
+//TODO. Add to dict: BAGEL, SWAMI snuck manga, covey
+        // STATISTICS pakesiti į correct word: word.
 
 
 
@@ -195,8 +191,11 @@ public class MainActivity extends AppCompatActivity {
         dictionaryViewModel = new ViewModelProvider.AndroidViewModelFactory(this.getApplication()).create(DictionaryViewModel.class);
         wordsDictionary = dictionaryViewModel.getAllWords();
 
+
         startNewGame();
         System.out.println("current word is " + wordToGuess.getWord());
+
+        resultsDialog = new ResultsDialog(this, wordToGuess);
 
 //        statistics.setWordsLeft(wordsViewModel.wordsToGuessSize());
 //        statistics.setGamesPlayed(0);
@@ -208,22 +207,9 @@ public class MainActivity extends AppCompatActivity {
 //        statistics.setGuessedOnFifth(0);
 //        statistics.setGuessedOnSixth(0);
 //        System.out.println("current word is " + wordsViewModel.wordsToGuessSize());
-//        updateStatistics(statistics);
+//        updateStatisticsPrefs(statistics);
 //        statistics = retrieveStatistics();
 //        System.out.println("current word is " + statistics.getWordsLeft());
-
-
-
-
-
-
-
-        resultsDialog = new ResultsDialog(statistics);
-        resultsDialog.showResultsDialog(this);
-
-        //Start with first row.
-        //setRoundRow(roundCount);
-
 
 
         //Delete char in each EditText of currentRow.
@@ -260,6 +246,8 @@ public class MainActivity extends AppCompatActivity {
         resultsDialog.restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                resetRows();
+                resultsDialog.dialog.cancel();
                 startNewGame();
             }
         });
@@ -268,7 +256,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-               resultsDialog.dialog.cancel();
+                finish();
+                System.exit(0);
             }
         });
     }
@@ -279,6 +268,17 @@ public class MainActivity extends AppCompatActivity {
         statistics = retrieveStatistics();
         roundCount = 1;
         setRoundRow(roundCount);
+
+        System.out.println("current word gamesplayed " + statistics.getGamesPlayed());
+        System.out.println("current word won " + statistics.getGamesWon());
+        System.out.println("current word 1 " + statistics.getGuessedOnFirst());
+        System.out.println("current word 2 " + statistics.getGuessedOnSecond());
+        System.out.println("current word 3 " + statistics.getGuessedOnThird());
+        System.out.println("current word 4 " + statistics.getGuessedOnFourth());
+        System.out.println("current word i5 " + statistics.getGuessedOnFifth());
+        System.out.println("current word 6 " + statistics.getGuessedOnSixth());
+        System.out.println("current word wordsleft " + statistics.getWordsLeft());
+
     }
 
 
@@ -292,8 +292,6 @@ public class MainActivity extends AppCompatActivity {
 
         return currentGuess;
 
-
-
     };
 
     public boolean isFiveLetters(String currentGuess) {
@@ -303,6 +301,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return true;
+
     }
 
     public boolean doesExist(String currentGuess) {
@@ -317,6 +316,27 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void compareGuess(String currentGuess, String correctAnswer) {
+
+
+        if (currentGuess.equals(correctAnswer)) {
+            //progress bars
+
+            wordToGuess.setGuessed(true);
+            wordsViewModel.updateWord(wordToGuess);
+            statistics.setWordsLeft(wordsViewModel.getWordsToGuess().size());
+            statistics.incrementGamesPlayed();
+            updateStatisticsGuesses(statistics, roundCount);
+            updateStatisticsPrefs(statistics);
+            resultsDialog.showResultsDialog(statistics);
+
+        }
+
+        if (currentRowList.containsAll(sixthRowList) && !(currentGuess.equals(correctAnswer)) ) {
+            statistics.incrementGamesPlayed();
+            updateStatisticsPrefs(statistics);
+            resultsDialog.showResultsDialog(statistics);
+
+        }
         for (int i = 0; i < currentGuess.length(); i++) {
 
             currentRowList.get(i).setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.tile_incorrect));
@@ -328,9 +348,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (currentGuess.charAt(i) == correctAnswer.charAt(i)) {
                     currentRowList.get(i).setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.tile_correct));
-                    resultsDialog.showResultsDialog(this);
 
                 }
+
 
             }
         }
@@ -341,10 +361,46 @@ public class MainActivity extends AppCompatActivity {
         roundCount++;
     }
 
+    private void resetRows() {
+
+        for (EditText editText : firstRowList) {
+            editText.setText("");
+            editText.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.tile_standard));
+        }
+
+        for (EditText editText : secondRowList) {
+            editText.setText("");
+            editText.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.tile_standard));
+        }
+
+        for (EditText editText : thirdRowList) {
+            editText.setText("");
+            editText.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.tile_standard));
+        }
+        for (EditText editText : fourthRowList) {
+            editText.setText("");
+            editText.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.tile_standard));
+        }
+        for (EditText editText : fifthRowList) {
+            editText.setText("");
+            editText.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.tile_standard));
+        }
+        for (EditText editText : sixthRowList) {
+            editText.setText("");
+            editText.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.tile_standard));
+        }
 
 
-    public void setRoundRow(int roundNumber) {
-        switch(roundNumber) {
+
+
+
+
+    }
+
+
+
+    public void setRoundRow(int roundCount) {
+        switch(roundCount) {
             case 1:
                 currentRowList = firstRowList;
                 break;
@@ -497,7 +553,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void updateStatistics (Statistics statistics) {
+
+    public void updateStatisticsPrefs(Statistics statistics) {
         mPrefs = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
@@ -516,4 +573,31 @@ public class MainActivity extends AppCompatActivity {
         }
         return statistics;
     }
+
+    private void updateStatisticsGuesses(Statistics statistics, int roundCount) {
+
+        switch(roundCount) {
+            case 1:
+                statistics.addGuessedOnFirst();
+                break;
+            case 2:
+                statistics.addGuessedOnSecond();
+                break;
+            case 3:
+                statistics.addGuessedOnThird();
+                break;
+            case 4:
+                statistics.addGuessedOnFourth();
+                break;
+            case 5:
+                statistics.addGuessedOnFifth();
+                break;
+            case 6:
+                statistics.addGuessedOnSixth();
+                break;
+
+        }
+
+}
+
 }
