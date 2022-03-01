@@ -25,6 +25,7 @@ public class WordsViewModel extends AndroidViewModel {
 
     public List<Words> getWordsToGuess() {
         wordsToGuess = wordsRepository.getWordsToGuess();
+
         return wordsToGuess;
     }
 

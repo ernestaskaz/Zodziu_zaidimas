@@ -243,7 +243,7 @@
         android:id="@+id/bar_one"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="100dp"
         app:layout_constraintStart_toEndOf="@+id/bar_one_string"
         app:layout_constraintTop_toBottomOf="@+id/distribution_string"
         android:layout_marginTop="10dp"

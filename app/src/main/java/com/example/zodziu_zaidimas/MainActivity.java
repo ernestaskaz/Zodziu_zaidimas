@@ -190,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
         wordsViewModel = new ViewModelProvider.AndroidViewModelFactory(this.getApplication()).create(WordsViewModel.class);
         dictionaryViewModel = new ViewModelProvider.AndroidViewModelFactory(this.getApplication()).create(DictionaryViewModel.class);
         wordsDictionary = dictionaryViewModel.getAllWords();
+        System.out.println("current word size is" + wordsDictionary.size());
 
 
         startNewGame();

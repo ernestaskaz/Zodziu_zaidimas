@@ -65,6 +65,11 @@ public class ResultsDialog {
         int dialogWidth = (int)(displayMetrics.widthPixels * 0.99);
         int dialogHeight = (int)(displayMetrics.heightPixels * 0.6);
         dialog.getWindow().setLayout(dialogWidth, dialogHeight);
+
+//        iew view = findViewById(R.id.nutrition_bar_filled);
+//        LayoutParams layoutParams = view.getLayoutParams();
+//        layoutParams.width = newWidth;
+//        view.setLayoutParams(layoutParams);
     }
 
     public void setStatistics(Statistics statistics) {
@@ -73,9 +78,28 @@ public class ResultsDialog {
         winPercent.setText(String.valueOf(calculateWinPercent(statistics))+ "%");
         wordsLeft.setText(String.valueOf(statistics.getWordsLeft()));
         correctWord.setText("CORRECT WORD IS: " + wordToGuess.getWord());
+        setProgressBars(statistics);
 
 
 
+    }
+
+    public void setProgressBars(Statistics statistics) {
+        int maxValue = statistics.returnHighestGuess();
+
+        barOne.setMax(maxValue);
+        barTwo.setMax(maxValue);
+        barThree.setMax(maxValue);
+        barFour.setMax(maxValue);
+        barFive.setMax(maxValue);
+        barSix.setMax(maxValue);
+
+        barOne.setProgress(statistics.getGuessedOnFirst());
+        barTwo.setProgress(statistics.getGuessedOnSecond());
+        barThree.setProgress(statistics.getGuessedOnThird());
+        barFour.setProgress(statistics.getGuessedOnFourth());
+        barFive.setProgress(statistics.getGuessedOnFifth());
+        barSix.setProgress(statistics.getGuessedOnSixth());
     }
 
     public void showResultsDialog(Statistics statistics) {

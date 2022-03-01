@@ -1,5 +1,8 @@
 package com.example.zodziu_zaidimas.Model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Statistics {
     private int gamesPlayed;
     private int guessedOnFirst;
@@ -109,6 +112,14 @@ public class Statistics {
 
     public void addGuessedOnSixth() {
         this.guessedOnSixth++;
+    }
+
+    public int returnHighestGuess() {
+        int [] array = { guessedOnFirst, guessedOnSecond, guessedOnThird, guessedOnFourth, guessedOnFifth, guessedOnSixth };
+        Arrays.sort(array);
+        int value = array[array.length - 1];
+        return value;
+
     }
 
 
