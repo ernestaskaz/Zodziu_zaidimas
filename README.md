@@ -14,7 +14,7 @@ Find hidden word with up to 6 tries. Each guess may reveal:
 - wrong letters - background set in black.
 
 
-- Keyboaord letters also changes colors according to guesses;
+- Keyboard letters also change colors according to guesses;
 - Words are checked in Dictionary that was imported to SQL and then to Room DB;
 - wordsToGuess are generated randomly from Room DB (also imported to Room with SQL);
 
