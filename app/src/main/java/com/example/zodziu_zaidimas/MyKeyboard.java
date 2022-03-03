@@ -1,6 +1,11 @@
 package com.example.zodziu_zaidimas;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.RippleDrawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.SparseArray;
@@ -9,12 +14,18 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+
+import androidx.core.content.ContextCompat;
+
+import java.util.List;
 
 public class MyKeyboard extends LinearLayout implements View.OnClickListener {
 
     private OnDeleteListener onDeleteListener;
     private OnEnterListener onEnterListener;
+
 
     // constructors
     public MyKeyboard(Context context) {
@@ -202,6 +213,31 @@ public class MyKeyboard extends LinearLayout implements View.OnClickListener {
             String value = keyValues.get(v.getId());
             inputConnection.commitText(value, 1);
         }
+    }
+    public void setKeyboardColors(List<EditText> currentRowList) {
+        for(int i = 0; i < currentRowList.size(); i++) {
+            for(int j = 0; j < keyValues.size(); j++) {
+                int key = keyValues.keyAt(j);
+                String currentLetter = keyValues.get(key);
+                if (currentRowList.get(i).getText().toString().equals(currentLetter)) {
+                    Button currentButton = findViewById(key);
+                    GradientDrawable drawable = (GradientDrawable)currentRowList.get(i).getBackground();
+                    currentButton.setBackgroundTintList(drawable.getColor());
+                }
+            }
+
+        }
+    }
+
+    public void resetKeyboardColors() {
+
+
+        for(int j = 0; j < keyValues.size(); j++) {
+            int key = keyValues.keyAt(j);
+            Button currentButton = findViewById(key);
+            currentButton.setBackgroundColor(Color.parseColor("#AEAEAE"));
+            }
+
     }
 
     // The activity (or some parent or controller) must give us

@@ -40,7 +40,7 @@ public class ResultsDialog {
     }
 
 
-    public void initializeResultsDialog(Context context) {
+    private void initializeResultsDialog(Context context) {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.results);
         dialog.getWindow().setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, Constraints.LayoutParams.WRAP_CONTENT);
@@ -67,7 +67,7 @@ public class ResultsDialog {
 
     }
 
-    public void setStatistics(Statistics statistics, Words wordToGuess) {
+    private void setStatistics(Statistics statistics, Words wordToGuess) {
         gamesPlayed.setText(String.valueOf(statistics.getGamesPlayed()));
         gamesWon.setText(String.valueOf(statistics.getGamesWon()));
         winPercent.setText(String.valueOf(calculateWinPercent(statistics))+ "%");
@@ -78,7 +78,7 @@ public class ResultsDialog {
 
     }
 
-    public void setProgressBars(Statistics statistics) {
+    private void setProgressBars(Statistics statistics) {
         int maxValue = statistics.returnHighestGuess();
 
         barOne.setMax(maxValue);
@@ -95,6 +95,8 @@ public class ResultsDialog {
         barFive.setProgress(statistics.getGuessedOnFifth());
         barSix.setProgress(statistics.getGuessedOnSixth());
     }
+
+
 
     public void showResultsDialog(Statistics statistics, Words wordToGuess) {
         setStatistics(statistics, wordToGuess);

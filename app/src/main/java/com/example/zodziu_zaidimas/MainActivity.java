@@ -100,42 +100,41 @@ public class MainActivity extends AppCompatActivity {
 
 
         // prevent system keyboard from appearing when EditText is tapped
-        rowOneIndexZero.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowOneIndexOne.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowOneIndexTwo.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowOneIndexThree.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowOneIndexFour.setRawInputType(InputType.TYPE_CLASS_TEXT);
-
-        rowTwoIndexZero.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowTwoIndexOne.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowTwoIndexTwo.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowTwoIndexThree.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowTwoIndexFour.setRawInputType(InputType.TYPE_CLASS_TEXT);
-
-        rowThreeIndexZero.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowThreeIndexOne.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowThreeIndexTwo.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowThreeIndexThree.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowThreeIndexFour.setRawInputType(InputType.TYPE_CLASS_TEXT);
-
-        rowFourIndexZero.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowFourIndexOne.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowFourIndexTwo.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowFourIndexThree.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowFourIndexFour.setRawInputType(InputType.TYPE_CLASS_TEXT);
-
-        rowFiveIndexZero.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowFiveIndexOne.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowFiveIndexTwo.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowFiveIndexThree.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowFiveIndexFour.setRawInputType(InputType.TYPE_CLASS_TEXT);
-
-        rowSixIndexZero.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowSixIndexOne.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowSixIndexTwo.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowSixIndexThree.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        rowSixIndexFour.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        //rowOneIndexZero.setTextIsSelectable(true);
+//        rowOneIndexZero.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowOneIndexOne.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowOneIndexTwo.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowOneIndexThree.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowOneIndexFour.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//
+//        rowTwoIndexZero.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowTwoIndexOne.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowTwoIndexTwo.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowTwoIndexThree.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowTwoIndexFour.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//
+//        rowThreeIndexZero.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowThreeIndexOne.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowThreeIndexTwo.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowThreeIndexThree.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowThreeIndexFour.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//
+//        rowFourIndexZero.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowFourIndexOne.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowFourIndexTwo.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowFourIndexThree.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowFourIndexFour.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//
+//        rowFiveIndexZero.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowFiveIndexOne.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowFiveIndexTwo.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowFiveIndexThree.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowFiveIndexFour.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//
+//        rowSixIndexZero.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowSixIndexOne.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowSixIndexTwo.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowSixIndexThree.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        rowSixIndexFour.setRawInputType(InputType.TYPE_CLASS_TEXT);
         rowOneIndexZero.setShowSoftInputOnFocus(false);
         rowOneIndexOne.setShowSoftInputOnFocus(false);
         rowOneIndexTwo.setShowSoftInputOnFocus(false);
@@ -173,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
         rowSixIndexFour.setShowSoftInputOnFocus(false);
 
 
-
+        //Initialize and group each row.
         firstRowList = Arrays.asList(rowOneIndexZero, rowOneIndexOne, rowOneIndexTwo, rowOneIndexThree, rowOneIndexFour);
         secondRowList = Arrays.asList(rowTwoIndexZero, rowTwoIndexOne, rowTwoIndexTwo, rowTwoIndexThree, rowTwoIndexFour);
         thirdRowList = Arrays.asList(rowThreeIndexZero, rowThreeIndexOne, rowThreeIndexTwo, rowThreeIndexThree, rowThreeIndexFour);
@@ -193,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("current word is " + wordToGuess.getWord());
 
         resultsDialog = new ResultsDialog(this);
-
+//        Reset values that are saved in sharedPrefs;
 //        statistics.setWordsLeft(wordsViewModel.wordsToGuessSize());
 //        statistics.setGamesPlayed(0);
 //        statistics.setGamesWon(0);
@@ -239,11 +238,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        
+        //reset Rows and keyboard colors/texts for new game.
         resultsDialog.restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 resetRows();
+                keyboard.resetKeyboardColors();
                 resultsDialog.dialog.cancel();
                 startNewGame();
             }
@@ -341,6 +341,7 @@ public class MainActivity extends AppCompatActivity {
                 if (currentGuess.charAt(i) == correctAnswer.charAt(j)) {
                     currentRowList.get(i).setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.tile_partial));
 
+
                 }
                 if (currentGuess.charAt(i) == correctAnswer.charAt(i)) {
                     currentRowList.get(i).setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.tile_correct));
@@ -350,8 +351,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
-
+        keyboard.setKeyboardColors(currentRowList);
     }
+
+
 
     public void incrementRoundCount() {
         roundCount++;
