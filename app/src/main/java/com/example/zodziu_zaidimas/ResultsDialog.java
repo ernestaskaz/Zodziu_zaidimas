@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Constraints;
+
 import com.example.zodziu_zaidimas.Model.Statistics;
 import com.example.zodziu_zaidimas.Model.Words;
 
@@ -29,10 +32,8 @@ public class ResultsDialog {
     TextView correctWord;
     Dialog dialog;
     Context context;
-    Words wordToGuess;
 
-    public ResultsDialog(Context context, Words wordToGuess) {
-        this.wordToGuess = wordToGuess;
+    public ResultsDialog(Context context) {
         this.context = context;
         dialog = new Dialog(context);
         initializeResultsDialog(context);
@@ -42,6 +43,7 @@ public class ResultsDialog {
     public void initializeResultsDialog(Context context) {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.results);
+        dialog.getWindow().setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, Constraints.LayoutParams.WRAP_CONTENT);
         dialog.setCanceledOnTouchOutside(false);
         dialog.setCancelable(true);
 
@@ -61,24 +63,16 @@ public class ResultsDialog {
         correctWord = dialog.findViewById(R.id.correct_word);
 
 
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        int dialogWidth = (int)(displayMetrics.widthPixels * 0.99);
-        int dialogHeight = (int)(displayMetrics.heightPixels * 0.6);
-        dialog.getWindow().setLayout(dialogWidth, dialogHeight);
 
-//        iew view = findViewById(R.id.nutrition_bar_filled);
-//        LayoutParams layoutParams = view.getLayoutParams();
-//        layoutParams.width = newWidth;
-//        view.setLayoutParams(layoutParams);
+
     }
 
-    public void setStatistics(Statistics statistics) {
+    public void setStatistics(Statistics statistics, Words wordToGuess) {
         gamesPlayed.setText(String.valueOf(statistics.getGamesPlayed()));
         gamesWon.setText(String.valueOf(statistics.getGamesWon()));
         winPercent.setText(String.valueOf(calculateWinPercent(statistics))+ "%");
         wordsLeft.setText(String.valueOf(statistics.getWordsLeft()));
         correctWord.setText("CORRECT WORD IS: " + wordToGuess.getWord());
-        setProgressBars(statistics);
 
 
 
@@ -102,8 +96,9 @@ public class ResultsDialog {
         barSix.setProgress(statistics.getGuessedOnSixth());
     }
 
-    public void showResultsDialog(Statistics statistics) {
-        setStatistics(statistics);
+    public void showResultsDialog(Statistics statistics, Words wordToGuess) {
+        setStatistics(statistics, wordToGuess);
+        setProgressBars(statistics);
         dialog.show();
     }
 

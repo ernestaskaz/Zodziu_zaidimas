@@ -23,12 +23,10 @@ public abstract class WordsDatabase extends RoomDatabase {
     public synchronized static WordsDatabase getInstance(Context context) {
         //condition
         if (wordsDatabase == null) {
-            // could it be that builder is used when NEW object can not be created?
-            wordsDatabase = Room.databaseBuilder(context.getApplicationContext(), WordsDatabase.class,DBNAME).fallbackToDestructiveMigration().createFromAsset("Dictionary.sqlite").build();
+            wordsDatabase = Room.databaseBuilder(context.getApplicationContext(), WordsDatabase.class,DBNAME).createFromAsset("Dictionary.sqlite").build();
         }
         return wordsDatabase;
     }
-    //body is taken care of by Room; Similar to Spring, but in Spring pačiam reikėjo implementuotis. čia nereik.
     public abstract WordsService wordsService();
     public abstract DictionaryService dictionaryService();
 

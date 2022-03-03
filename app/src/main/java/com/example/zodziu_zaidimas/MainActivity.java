@@ -182,10 +182,6 @@ public class MainActivity extends AppCompatActivity {
         sixthRowList = Arrays.asList(rowSixIndexZero, rowSixIndexOne, rowSixIndexTwo, rowSixIndexThree, rowSixIndexFour);
 
 
-//TODO. Add to dict: BAGEL, SWAMI snuck manga, covey
-        // STATISTICS pakesiti į correct word: word.
-
-
 
         wordsViewModel = new ViewModelProvider.AndroidViewModelFactory(this.getApplication()).create(WordsViewModel.class);
         dictionaryViewModel = new ViewModelProvider.AndroidViewModelFactory(this.getApplication()).create(DictionaryViewModel.class);
@@ -196,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
         startNewGame();
         System.out.println("current word is " + wordToGuess.getWord());
 
-        resultsDialog = new ResultsDialog(this, wordToGuess);
+        resultsDialog = new ResultsDialog(this);
 
 //        statistics.setWordsLeft(wordsViewModel.wordsToGuessSize());
 //        statistics.setGamesPlayed(0);
@@ -226,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
                 keyboard.setInputConnection(ic);
             }
         });
-
+        //main exit point. check if word exists in dictionary and if exists check if is wordToGuess.
         keyboard.setOnEnterListener(new MyKeyboard.OnEnterListener() {
             @Override
             public void onEnterClick() {
@@ -282,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    //get chars from each edit text of currentRow and convert it to String to compare.
     public String convertRowToString(List<EditText> currentRow) {
         String currentGuess = "";
         for (int i = 0; i < currentRow.size(); i++) {
@@ -315,12 +311,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+        //main logic
     public void compareGuess(String currentGuess, String correctAnswer) {
 
 
         if (currentGuess.equals(correctAnswer)) {
-            //progress bars
 
             wordToGuess.setGuessed(true);
             wordsViewModel.updateWord(wordToGuess);
@@ -328,14 +323,14 @@ public class MainActivity extends AppCompatActivity {
             statistics.incrementGamesPlayed();
             updateStatisticsGuesses(statistics, roundCount);
             updateStatisticsPrefs(statistics);
-            resultsDialog.showResultsDialog(statistics);
+            resultsDialog.showResultsDialog(statistics, wordToGuess);
 
         }
 
         if (currentRowList.containsAll(sixthRowList) && !(currentGuess.equals(correctAnswer)) ) {
             statistics.incrementGamesPlayed();
             updateStatisticsPrefs(statistics);
-            resultsDialog.showResultsDialog(statistics);
+            resultsDialog.showResultsDialog(statistics, wordToGuess);
 
         }
         for (int i = 0; i < currentGuess.length(); i++) {
@@ -362,6 +357,7 @@ public class MainActivity extends AppCompatActivity {
         roundCount++;
     }
 
+    //set all EditTexts to ""; new game.
     private void resetRows() {
 
         for (EditText editText : firstRowList) {
@@ -399,7 +395,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    //set currentRow.
     public void setRoundRow(int roundCount) {
         switch(roundCount) {
             case 1:
