@@ -9,9 +9,9 @@ A Wordle game for android  - inspired by original Wordle. Created without word/d
 
 Find hidden word with up to 6 tries. Each guess may reveal: 
 
--a)correct letter in a correct index - background set in green;
--b)correct letter but wrong index - background set in orange;
--c)wrong letters - background set in black.
+- correct letter in a correct index - background set in green;
+- correct letter but wrong index - background set in orange;
+- wrong letters - background set in black.
 
 
 - Keyboaord letters also changes colors according to guesses;
