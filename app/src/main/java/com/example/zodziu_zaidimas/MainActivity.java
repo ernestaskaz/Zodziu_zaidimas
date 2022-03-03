@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
         sixthRowList = Arrays.asList(rowSixIndexZero, rowSixIndexOne, rowSixIndexTwo, rowSixIndexThree, rowSixIndexFour);
 
 
-
+        //Init viewModels and get Dictionary + wordToGuess;
         wordsViewModel = new ViewModelProvider.AndroidViewModelFactory(this.getApplication()).create(WordsViewModel.class);
         dictionaryViewModel = new ViewModelProvider.AndroidViewModelFactory(this.getApplication()).create(DictionaryViewModel.class);
         wordsDictionary = dictionaryViewModel.getAllWords();
@@ -314,25 +314,29 @@ public class MainActivity extends AppCompatActivity {
         //main logic
     public void compareGuess(String currentGuess, String correctAnswer) {
 
-
+        //if word is guessed correctly;
         if (currentGuess.equals(correctAnswer)) {
 
             wordToGuess.setGuessed(true);
             wordsViewModel.updateWord(wordToGuess);
+            //update statistics that are saved in sharedPrefs;
             statistics.setWordsLeft(wordsViewModel.getWordsToGuess().size());
             statistics.incrementGamesPlayed();
             updateStatisticsGuesses(statistics, roundCount);
+            //update sharedPrefs with new values;
             updateStatisticsPrefs(statistics);
             resultsDialog.showResultsDialog(statistics, wordToGuess);
 
         }
-
+        //if word is not guessed correctly after six tries;
         if (currentRowList.containsAll(sixthRowList) && !(currentGuess.equals(correctAnswer)) ) {
             statistics.incrementGamesPlayed();
             updateStatisticsPrefs(statistics);
             resultsDialog.showResultsDialog(statistics, wordToGuess);
 
         }
+
+        //Set colors of each EditText in currentRowList;
         for (int i = 0; i < currentGuess.length(); i++) {
 
             currentRowList.get(i).setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.tile_incorrect));
@@ -389,11 +393,6 @@ public class MainActivity extends AppCompatActivity {
             editText.setText("");
             editText.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.tile_standard));
         }
-
-
-
-
-
 
     }
 
@@ -553,7 +552,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    //statistics object is saved in sharedPrefs;
     public void updateStatisticsPrefs(Statistics statistics) {
         mPrefs = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
