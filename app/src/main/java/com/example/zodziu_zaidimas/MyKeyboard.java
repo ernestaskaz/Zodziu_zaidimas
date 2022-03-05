@@ -234,8 +234,15 @@ public class MyKeyboard extends LinearLayout implements View.OnClickListener {
 
         for(int j = 0; j < keyValues.size(); j++) {
             int key = keyValues.keyAt(j);
+
+            Button standardButton = findViewById(R.id.button_enter);
+            RippleDrawable drawable = (RippleDrawable) standardButton.getBackground();
+
+           // standardButton.setBackgroundTintList(drawable.getColor());
+
             Button currentButton = findViewById(key);
-            currentButton.setBackgroundColor(Color.parseColor("#AEAEAE"));
+            currentButton.setBackgroundTintList(drawable.getEffectColor());
+            //currentButton.setBackgroundColor(Color.parseColor("#AEAEAE"));
             }
 
     }
